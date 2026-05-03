@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Ilias Ahmim | BTS SIO</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #3b82f6;
+            --accent: #64748b;
+            --bg-color: #f1f5f9;
+            --glass: rgba(255,255,255,0.9);
+            --shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+            --gradient: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); color: #334155; font-family: 'Inter', sans-serif; line-height: 1.7; overflow-x: hidden; }
+        h1,h2,h3,h4,.logo,.btn { font-family: 'Poppins', sans-serif; }
+
+        /* NAV */
+        nav { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 1rem 5%; position: fixed; width: 100%; top: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.05); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--primary); letter-spacing: -0.5px; }
+        nav ul { list-style: none; display: flex; gap: 30px; align-items: center; }
+        nav a { text-decoration: none; color: var(--primary); font-weight: 500; font-size: 0.95rem; transition: 0.3s; position: relative; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background: var(--secondary); transition: width 0.3s; }
+        nav a:hover::after { width: 100%; }
+        nav a:hover { color: var(--secondary); }
+
+        /* HEADER */
+        header { min-height: 100vh; background: var(--gradient); background-size: 200% 200%; animation: gradientMove 10s ease infinite; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px 20px; position: relative; overflow: hidden; }
+        header::before { content: ''; position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%); top: -100px; right: -100px; border-radius: 50%; }
+        header::after { content: ''; position: absolute; width: 350px; height: 350px; background: radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 70%); bottom: -60px; left: -60px; border-radius: 50%; }
+        @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        header h1 { font-size: 3.5rem; margin-bottom: 10px; font-weight: 700; letter-spacing: -1px; animation: slideUp 0.8s ease-out; position: relative; z-index: 1; }
+        header h2 { font-size: 1.4rem; font-weight: 300; color: #e2e8f0; margin-bottom: 30px; animation: slideUp 1s ease-out; position: relative; z-index: 1; }
+
+        /* HERO INTRO */
+        .hero-intro { max-width: 680px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.13); border-radius: 20px; padding: 30px 35px; margin-bottom: 35px; text-align: left; animation: slideUp 1.1s ease-out; position: relative; z-index: 1; backdrop-filter: blur(4px); }
+        .hero-intro p { color: #cbd5e1; font-size: 0.97rem; line-height: 1.85; }
+        .hero-intro p + p { margin-top: 14px; }
+        .hero-intro strong { color: #93c5fd; }
+        .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .hero-tag { background: rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.35); color: #93c5fd; padding: 5px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; }
+
+        /* BOUTONS */
+        .btn { padding: 14px 35px; background: var(--secondary); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(37,99,235,0.3); position: relative; z-index: 1; }
+        .btn:hover { background: #2563eb; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(37,99,235,0.5); }
+        .btn-outline { background: transparent; border: 2px solid white; box-shadow: none; margin-left: 10px; }
+        .btn-outline:hover { background: white; color: var(--primary); }
+
+        /* SECTIONS */
+        section { padding: 100px 10%; }
+        h3.section-title { text-align: center; font-size: 2.2rem; color: var(--primary); margin-bottom: 15px; font-weight: 700; }
+        h3.section-title::after { content: ''; display: block; width: 55px; height: 4px; background: var(--secondary); border-radius: 2px; margin: 14px auto 0; }
+        .section-desc { text-align: center; color: var(--accent); margin-bottom: 55px; margin-top: 10px; font-size: 0.97rem; }
+
+        /* CARDS */
+        .card-style { background: var(--glass); padding: 35px; border-radius: 20px; box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,0.5); transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275); position: relative; overflow: hidden; }
+        .card-style:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -15px rgba(0,0,0,0.15); }
+
+        /* PARCOURS */
+        .exp-card { margin-bottom: 25px; }
+        .exp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; flex-wrap: wrap; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; }
+        .exp-title { font-size: 1.25rem; font-weight: 700; color: var(--primary); }
+        .exp-title i { margin-right: 10px; color: var(--secondary); }
+        .exp-date { color: var(--secondary); font-weight: 600; font-size: 0.9rem; background: #eff6ff; padding: 5px 12px; border-radius: 20px; }
+        .exp-list { margin-left: 20px; }
+        .exp-list li { margin-bottom: 10px; color: #475569; }
+
+        /* SKILLS */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .skill-card { text-align: center; border-top: 5px solid var(--secondary); }
+        .skill-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; background: #eff6ff; width: 80px; height: 80px; line-height: 80px; border-radius: 50%; transition: 0.4s; display: inline-block; }
+        .skill-card:hover i { background: var(--secondary); color: white; transform: rotate(360deg); }
+        .skill-card h4 { font-size: 1.2rem; margin-bottom: 15px; color: var(--primary); }
+
+        /* PROJETS */
+        .project-container { display: grid; gap: 40px; }
+        .project-card { display: flex; flex-direction: column; border-left: 5px solid var(--secondary); }
+        @media (min-width: 768px) { .project-card { flex-direction: row; align-items: center; } }
+        .project-content { padding: 10px; }
+        .tag { background: var(--primary); color: white; padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; margin-right: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .tag.lab { background: #8b5cf6; }
+
+        /* VEILLE */
+        .veille-box { border-left: 5px solid #ef4444; background: linear-gradient(to right, #fff, #fff5f5); }
+
+        /* ===== SECTION E5 ===== */
+        .e5-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
+        .e5-card { background: var(--glass); border-radius: 16px; border: 1px solid rgba(255,255,255,0.5); border-top: 4px solid var(--secondary); box-shadow: var(--shadow); text-decoration: none; color: inherit; display: flex; align-items: center; gap: 18px; padding: 22px 24px; transition: all 0.35s cubic-bezier(0.175,0.885,0.32,1.275); position: relative; overflow: hidden; }
+        .e5-card:hover { transform: translateY(-7px); box-shadow: 0 20px 40px -10px rgba(59,130,246,0.18); }
+        .e5-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.25rem; transition: all 0.3s; background: #eff6ff; color: var(--secondary); }
+        .e5-card:hover .e5-icon { background: var(--secondary); color: white; }
+        .e5-body { flex: 1; }
+        .e5-body h4 { font-size: 0.92rem; font-weight: 700; color: var(--primary); margin-bottom: 5px; line-height: 1.4; }
+        .e5-body span { font-size: 0.78rem; color: var(--accent); display: flex; align-items: center; gap: 5px; }
+        .e5-arrow { color: #cbd5e1; font-size: 0.85rem; flex-shrink: 0; transition: transform 0.3s, color 0.3s; }
+        .e5-card:hover .e5-arrow { transform: translateX(4px); color: var(--secondary); }
+
+        .e5-c1 { border-top-color: #3b82f6; } .e5-c1 .e5-icon { background:#eff6ff; color:#3b82f6; } .e5-c1:hover .e5-icon { background:#3b82f6; color:white; }
+        .e5-c2 { border-top-color: #10b981; } .e5-c2 .e5-icon { background:#ecfdf5; color:#10b981; } .e5-c2:hover .e5-icon { background:#10b981; color:white; } .e5-c2:hover { box-shadow:0 20px 40px -10px rgba(16,185,129,0.18); }
+        .e5-c3 { border-top-color: #8b5cf6; } .e5-c3 .e5-icon { background:#f5f3ff; color:#8b5cf6; } .e5-c3:hover .e5-icon { background:#8b5cf6; color:white; } .e5-c3:hover { box-shadow:0 20px 40px -10px rgba(139,92,246,0.18); }
+        .e5-c4 { border-top-color: #f59e0b; } .e5-c4 .e5-icon { background:#fffbeb; color:#f59e0b; } .e5-c4:hover .e5-icon { background:#f59e0b; color:white; } .e5-c4:hover { box-shadow:0 20px 40px -10px rgba(245,158,11,0.18); }
+        .e5-c5 { border-top-color: #ef4444; } .e5-c5 .e5-icon { background:#fef2f2; color:#ef4444; } .e5-c5:hover .e5-icon { background:#ef4444; color:white; } .e5-c5:hover { box-shadow:0 20px 40px -10px rgba(239,68,68,0.18); }
+        .e5-c6 { border-top-color: #0ea5e9; } .e5-c6 .e5-icon { background:#f0f9ff; color:#0ea5e9; } .e5-c6:hover .e5-icon { background:#0ea5e9; color:white; } .e5-c6:hover { box-shadow:0 20px 40px -10px rgba(14,165,233,0.18); }
+        .e5-c7 { border-top-color: #f97316; } .e5-c7 .e5-icon { background:#fff7ed; color:#f97316; } .e5-c7:hover .e5-icon { background:#f97316; color:white; } .e5-c7:hover { box-shadow:0 20px 40px -10px rgba(249,115,22,0.18); }
+        .e5-c8 { border-top-color: #14b8a6; } .e5-c8 .e5-icon { background:#f0fdfa; color:#14b8a6; } .e5-c8:hover .e5-icon { background:#14b8a6; color:white; } .e5-c8:hover { box-shadow:0 20px 40px -10px rgba(20,184,166,0.18); }
+        .e5-c9 { border-top-color: #6366f1; } .e5-c9 .e5-icon { background:#eef2ff; color:#6366f1; } .e5-c9:hover .e5-icon { background:#6366f1; color:white; } .e5-c9:hover { box-shadow:0 20px 40px -10px rgba(99,102,241,0.18); }
+
+        /* CONTACT */
+        .contact-section { background: var(--primary); color: white; text-align: center; position: relative; overflow: hidden; }
+        .contact-section::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); pointer-events: none; }
+
+        /* FOOTER */
+        footer { background: #0f172a; color: #64748b; text-align: center; padding: 30px; font-size: 0.9rem; border-top: 1px solid #1e293b; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            header h1 { font-size: 2.5rem; }
+            section { padding: 60px 5%; }
+            .project-card { flex-direction: column; }
+            .hero-intro { padding: 22px 18px; }
+            .e5-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Ilias.<span style="color:var(--secondary)">Ahmim</span></div>
+        <ul>
+            <li><a href="#about">Parcours</a></li>
+            <li><a href="#competences">Compétences</a></li>
+            <li><a href="#e5">E5</a></li>
+            <li><a href="#epreuves">E6</a></li>
+            <li><a href="#veille">Veille</a></li>
+            <li><a href="#contact" class="btn" style="padding: 8px 20px; font-size: 0.9rem;">CV</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <header>
+        <h1>Ilias Ahmim</h1>
+        <h2>Technicien Réseaux & Infrastructure</h2>
+        <div class="hero-intro">
+            <p>Passionné d'informatique <strong>depuis l'enfance</strong>, j'ai naturellement orienté mon parcours vers les systèmes et les réseaux. Après un <strong>Bac Pro SN option RISC</strong> à l'IRIS Paris, j'ai poursuivi en <strong>BTS SIO option SISR</strong> — une évolution évidente qui me permet de transformer cette passion en une véritable expertise professionnelle.</p>
+            <p>Aujourd'hui alternant chez <strong>Radiall</strong>, j'administre, sécurise et optimise des infrastructures informatiques au quotidien. Ce qui me motive avant tout ? La <strong>résolution de problèmes complexes</strong> et la <strong>sécurisation des systèmes</strong> — deux domaines où chaque défi devient une occasion de progresser.</p>
+            <p>J'aime me <strong>faire challenger</strong> : plus une problématique est difficile, plus elle m'incite à creuser, comprendre et maîtriser. Cette curiosité technique, alliée à une approche rigoureuse, me permet d'apporter des solutions concrètes et durables à chaque mission.</p>
+            <div class="hero-tags">
+                <span class="hero-tag"><i class="fas fa-network-wired" style="margin-right:5px;"></i> Réseaux</span>
+                <span class="hero-tag"><i class="fas fa-shield-alt" style="margin-right:5px;"></i> Cybersécurité</span>
+                <span class="hero-tag"><i class="fas fa-server" style="margin-right:5px;"></i> Infrastructure</span>
+                <span class="hero-tag"><i class="fas fa-map-marker-alt" style="margin-right:5px;"></i> Suresnes (92)</span>
+            </div>
+        </div>
+        <div>
+            <a href="#projets" class="btn"><i class="fas fa-rocket"></i> Voir mes projets</a>
+            <a href="#contact" class="btn btn-outline">Me contacter</a>
+        </div>
+    </header>
+
+    <!-- PARCOURS -->
+    <section id="about">
+        <h3 class="section-title">Parcours & Expériences</h3>
+
+        <!-- Bloc BTS SIO SISR -->
+        <div class="card-style" style="margin-bottom:35px; border-left:5px solid var(--secondary); background: linear-gradient(to right, #fff, #f0f9ff);">
+            <div style="display:flex; align-items:center; gap:15px; margin-bottom:20px;">
+                <div style="width:55px; height:55px; background:#eff6ff; border-radius:14px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                    <i class="fas fa-graduation-cap" style="color:var(--secondary); font-size:1.5rem;"></i>
+                </div>
+                <div>
+                    <h4 style="color:var(--primary); font-size:1.2rem; margin:0;">Le BTS SIO — option SISR</h4>
+                    <span style="font-size:0.85rem; color:var(--accent);">Services Informatiques aux Organisations — Solutions d'Infrastructure, Systèmes et Réseaux</span>
+                </div>
+            </div>
+
+            <p style="color:#475569; font-size:0.95rem; line-height:1.85; margin-bottom:14px;">
+                Le <strong>BTS SIO (Services Informatiques aux Organisations)</strong> est un diplôme de niveau Bac+2 qui forme des techniciens capables de répondre aux besoins informatiques des entreprises. Il se décline en deux options : <strong>SLAM</strong> (développement applicatif) et <strong>SISR</strong> (infrastructure et réseaux), cette dernière étant celle que je poursuis.
+            </p>
+
+            <p style="color:#475569; font-size:0.95rem; line-height:1.85; margin-bottom:14px;">
+                L'option <strong>SISR — Solutions d'Infrastructure, Systèmes et Réseaux</strong> forme des spécialistes de l'administration des infrastructures informatiques. Elle couvre la gestion des serveurs, la configuration des réseaux, la virtualisation, la cybersécurité et le support aux utilisateurs. Le technicien SISR est le garant du bon fonctionnement et de la sécurité du système d'information de l'entreprise.
+            </p>
+
+            <p style="color:#475569; font-size:0.95rem; line-height:1.85; margin-bottom:20px;">
+                La formation se déroule en <strong>alternance</strong>, permettant de mettre en pratique directement en entreprise les compétences acquises en cours. C'est cette approche concrète qui m'a permis, chez <strong>Radiall</strong>, de gérer des projets réels d'infrastructure et de sécurisation du parc informatique.
+            </p>
+
+            <!-- Compétences clés -->
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
+                <div style="background:#eff6ff; border-radius:10px; padding:14px; display:flex; align-items:center; gap:12px;">
+                    <i class="fas fa-server" style="color:var(--secondary); font-size:1.2rem;"></i>
+                    <span style="font-size:0.88rem; color:#1e40af; font-weight:600;">Administration systèmes</span>
+                </div>
+                <div style="background:#eff6ff; border-radius:10px; padding:14px; display:flex; align-items:center; gap:12px;">
+                    <i class="fas fa-network-wired" style="color:var(--secondary); font-size:1.2rem;"></i>
+                    <span style="font-size:0.88rem; color:#1e40af; font-weight:600;">Réseaux & protocoles</span>
+                </div>
+                <div style="background:#eff6ff; border-radius:10px; padding:14px; display:flex; align-items:center; gap:12px;">
+                    <i class="fas fa-shield-alt" style="color:var(--secondary); font-size:1.2rem;"></i>
+                    <span style="font-size:0.88rem; color:#1e40af; font-weight:600;">Cybersécurité</span>
+                </div>
+                <div style="background:#eff6ff; border-radius:10px; padding:14px; display:flex; align-items:center; gap:12px;">
+                    <i class="fas fa-headset" style="color:var(--secondary); font-size:1.2rem;"></i>
+                    <span style="font-size:0.88rem; color:#1e40af; font-weight:600;">Support utilisateurs</span>
+                </div>
+                <div style="background:#eff6ff; border-radius:10px; padding:14px; display:flex; align-items:center; gap:12px;">
+                    <i class="fas fa-cloud" style="color:var(--secondary); font-size:1.2rem;"></i>
+                    <span style="font-size:0.88rem; color:#1e40af; font-weight:600;">Virtualisation & Cloud</span>
+                </div>
+                <div style="background:#eff6ff; border-radius:10px; padding:14px; display:flex; align-items:center; gap:12px;">
+                    <i class="fas fa-file-alt" style="color:var(--secondary); font-size:1.2rem;"></i>
+                    <span style="font-size:0.88rem; color:#1e40af; font-weight:600;">Rédaction technique</span>
+                </div>
+            </div>
+        </div>
+            <div class="exp-header">
+                <span class="exp-title"><i class="fas fa-building"></i> RADIALL - Correspondant Informatique</span>
+                <span class="exp-date">En cours</span>
+            </div>
+            <p style="margin-bottom: 15px;"><strong>Mission :</strong> Assurer l'exploitation informatique et le respect des niveaux de service.</p>
+            <ul class="exp-list">
+                <li><i class="fas fa-check" style="color:var(--secondary); margin-right:8px;"></i> Gérer et exploiter le parc informatique (serveurs, stations, réseaux).</li>
+                <li><i class="fas fa-check" style="color:var(--secondary); margin-right:8px;"></i> Accompagnement métier et formation des utilisateurs.</li>
+                <li><i class="fas fa-check" style="color:var(--secondary); margin-right:8px;"></i> Pilotage des prestataires de sous-traitance.</li>
+                <li><i class="fas fa-check" style="color:var(--secondary); margin-right:8px;"></i> Rédaction de procédures et rapports techniques.</li>
+            </ul>
+        </div>
+        <div class="card-style exp-card">
+            <div class="exp-header">
+                <span class="exp-title"><i class="fas fa-laptop-medical"></i> INFOTING PARIS - Stage Technicien</span>
+                <span class="exp-date">Nov 2023 - Déc 2023</span>
+            </div>
+            <ul class="exp-list">
+                <li><i class="fas fa-check" style="color:var(--secondary); margin-right:8px;"></i> Diagnostic système et recherche de failles de sécurité.</li>
+                <li><i class="fas fa-check" style="color:var(--secondary); margin-right:8px;"></i> Installation d'équipements réseaux (Routeurs, Switchs).</li>
+                <li><i class="fas fa-check" style="color:var(--secondary); margin-right:8px;"></i> Maintenance préventive et corrective.</li>
+            </ul>
+        </div>
+        <div class="card-style exp-card" style="border-left-color: var(--accent);">
+            <div class="exp-header">
+                <span class="exp-title"><i class="fas fa-graduation-cap"></i> Formation Académique</span>
+            </div>
+            <div style="display: grid; gap: 15px;">
+                <div><strong>BTS SIO - Option SISR</strong> (2024 - 2026)<br><span style="color: var(--accent);">IRIS Paris</span></div>
+                <div><strong>Bac Pro SN - Option RISC</strong> (2022 - 2024)<br><span style="color: var(--accent);">IRIS Paris</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPÉTENCES -->
+    <section id="competences" style="background-color: white;">
+        <h3 class="section-title">Compétences Techniques</h3>
+        <div class="skills-grid">
+            <div class="card-style skill-card">
+                <i class="fab fa-windows"></i>
+                <h4>Systèmes & OS</h4>
+                <p>Windows 10/11, Server</p>
+                <p style="color: var(--secondary); font-weight: 600;">Linux (Debian, Ubuntu)</p>
+            </div>
+            <div class="card-style skill-card">
+                <i class="fas fa-network-wired"></i>
+                <h4>Réseaux</h4>
+                <p>TCP/IP, VLAN, DHCP, DNS</p>
+                <p>Switching & Routing Cisco</p>
+            </div>
+            <div class="card-style skill-card">
+                <i class="fas fa-tools"></i>
+                <h4>Outils & Virtualisation</h4>
+                <p>VMware, Putty, SSH</p>
+                <p>GLPI, Ticketing</p>
+            </div>
+            <div class="card-style skill-card">
+                <i class="fas fa-globe"></i>
+                <h4>Langues</h4>
+                <p>Français (Natif)</p>
+                <p>Anglais (Opérationnel)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- E5 DOCUMENTS -->
+    <section id="e5" style="background-color: white;">
+        <h3 class="section-title">Documents E5</h3>
+        <p class="section-desc">Cliquez sur un sujet pour ouvrir le rapport PDF correspondant.</p>
+        <div class="e5-grid">
+
+            <a href="E5/1-installation pfsense.pdf" target="_blank" class="e5-card e5-c1">
+                <div class="e5-icon"><i class="fas fa-fire-alt"></i></div>
+                <div class="e5-body">
+                    <h4>Installation pfSense</h4>
+                    <span><i class="fas fa-file-pdf"></i>&nbsp; Rapport PDF</span>
+                </div>
+                <i class="fas fa-chevron-right e5-arrow"></i>
+            </a>
+
+            <a href="E5/Active Directory 1.pdf" target="_blank" class="e5-card e5-c2">
+                <div class="e5-icon"><i class="fas fa-users-cog"></i></div>
+                <div class="e5-body">
+                    <h4>Active Directory</h4>
+                    <span><i class="fas fa-file-pdf"></i>&nbsp; Rapport PDF</span>
+                </div>
+                <i class="fas fa-chevron-right e5-arrow"></i>
+            </a>
+
+            <a href="E5/Déploiement d'une solution d'accès sans fil des utilisateurs mobiles de Stadiumcompagny (Wifi).pdf" target="_blank" class="e5-card e5-c3">
+                <div class="e5-icon"><i class="fas fa-wifi"></i></div>
+                <div class="e5-body">
+                    <h4>Déploiement Wifi — Stadiumcompagny</h4>
+                    <span><i class="fas fa-file-pdf"></i>&nbsp; Rapport PDF</span>
+                </div>
+                <i class="fas fa-chevron-right e5-arrow"></i>
+            </a>
+
+            <a href="E5/Implémentation d'une solution de travail collaboratif (Zimbra) (2) 1(1)2.0.pdf" target="_blank" class="e5-card e5-c4">
+                <div class="e5-icon"><i class="fas fa-envelope-open-text"></i></div>
+                <div class="e5-body">
+                    <h4>Solution collaborative Zimbra</h4>
+                    <span><i class="fas fa-file-pdf"></i>&nbsp; Rapport PDF</span>
+                </div>
+                <i class="fas fa-chevron-right e5-arrow"></i>
+            </a>
+
+            <a href="E5/OCS-GLPI 1.pdf" target="_blank" class="e5-card e5-c5">
+                <div class="e5-icon"><i class="fas fa-desktop"></i></div>
+                <div class="e5-body">
+                    <h4>Inventaire OCS — GLPI</h4>
+                    <span><i class="fas fa-file-pdf"></i>&nbsp; Rapport PDF</span>
+                </div>
+                <i class="fas fa-chevron-right e5-arrow"></i>
+            </a>
+
+            <a href="E5/Optimiser le réferencement du site web avec SEO (Search Engin Optimisation).pdf" target="_blank" class="e5-card e5-c6">
+                <div class="e5-icon"><i class="fas fa-search"></i></div>
+                <div class="e5-body">
+                    <h4>Optimisation SEO du site web</h4>
+                    <span><i class="fas fa-file-pdf"></i>&nbsp; Rapport PDF</span>
+                </div>
+                <i class="fas fa-chevron-right e5-arrow"></i>
+            </a>
+
+            <a href="E5/Redondance et haute disponibilité des éléments d'interconnexions de Stadiumcompagny (HSRP) (1) 1.pdf" target="_blank" class="e5-card e5-c7">
+                <div class="e5-icon"><i class="fas fa-random"></i></div>
+                <div class="e5-body">
+                    <h4>Redondance & Haute Dispo. HSRP</h4>
+                    <span><i class="fas fa-file-pdf"></i>&nbsp; Rapport PDF</span>
+                </div>
+                <i class="fas fa-chevron-right e5-arrow"></i>
+            </a>
+
+            <a href="E5/Restructuration de l'infrastructure Stadiumcompagny (VLAN^J Routage inter-vlan^J Routage Statique).pdf" target="_blank" class="e5-card e5-c8">
+                <div class="e5-icon"><i class="fas fa-sitemap"></i></div>
+                <div class="e5-body">
+                    <h4>Restructuration VLAN & Routage</h4>
+                    <span><i class="fas fa-file-pdf"></i>&nbsp; Rapport PDF</span>
+                </div>
+                <i class="fas fa-chevron-right e5-arrow"></i>
+            </a>
+
+            <a href="E5/Supervision de l'infrastructure de Stadiumcompagny (Nagios XI) (1).pdf" target="_blank" class="e5-card e5-c9">
+                <div class="e5-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="e5-body">
+                    <h4>Supervision Nagios XI — Stadiumcompagny</h4>
+                    <span><i class="fas fa-file-pdf"></i>&nbsp; Rapport PDF</span>
+                </div>
+                <i class="fas fa-chevron-right e5-arrow"></i>
+            </a>
+
+            <a href="E5/Sécurisation des communications entre sites et en interne (1).pdf" target="_blank" class="e5-card" style="border-top-color:#ec4899;">
+                <div class="e5-icon" style="background:#fdf2f8; color:#ec4899;"><i class="fas fa-lock"></i></div>
+                <div class="e5-body">
+                    <h4>Sécurisation des communications inter-sites</h4>
+                    <span><i class="fas fa-file-pdf"></i>&nbsp; Rapport PDF</span>
+                </div>
+                <i class="fas fa-chevron-right e5-arrow"></i>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- E6 -->
+    <section id="epreuves">
+        <h3 class="section-title">E6</h3>
+        <p class="section-desc">Épreuve professionnelle de synthèse — BTS SIO option SISR.</p>
+        <div class="skills-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+
+            <a href="Procédure install MDT (1).pdf" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="card-style skill-card" style="text-align:left; border-top-color:#3b82f6; cursor:pointer;">
+                <div style="display:flex; align-items:center; margin-bottom:15px;">
+                    <i class="fab fa-windows" style="background:#eff6ff; color:#3b82f6; font-size:1.5rem; width:50px; height:50px; line-height:50px; margin-bottom:0; margin-right:15px;"></i>
+                    <h4 style="margin:0; color:#3b82f6;">Projet 1</h4>
+                    <i class="fas fa-file-pdf" style="margin-left:auto; color:#3b82f6; font-size:1.1rem;"></i>
+                </div>
+                <p style="font-weight:700; font-size:1rem; margin-bottom:12px; color:var(--primary);">Migration des postes vers Windows 11</p>
+                <p style="font-size:0.9rem; color:#64748b; margin-bottom:10px;">
+                    <strong>Contexte :</strong> Obsolescence de Windows 10 et exigences de sécurité renforcées (TPM 2.0) imposées par Radiall.
+                </p>
+                <p style="font-size:0.9rem; color:#64748b;">
+                    <strong>Réalisation :</strong> Vérification des prérequis matériels, masterisation des postes, déploiement de Windows 11 et accompagnement des utilisateurs tout au long de la transition.
+                </p>
+                <br>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <span style="background:#eff6ff; color:#1d4ed8; padding:4px 12px; border-radius:50px; font-size:0.75rem; font-weight:600;">Windows 11</span>
+                    <span style="background:#eff6ff; color:#1d4ed8; padding:4px 12px; border-radius:50px; font-size:0.75rem; font-weight:600;">Déploiement</span>
+                    <span style="background:#eff6ff; color:#1d4ed8; padding:4px 12px; border-radius:50px; font-size:0.75rem; font-weight:600;">Radiall</span>
+                </div>
+            </div>
+            </a>
+
+            <a href="DCH - Procédure autorisation USB Key [FR].pdf" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="card-style skill-card" style="text-align:left; border-top-color:#10b981; cursor:pointer;">
+                <div style="display:flex; align-items:center; margin-bottom:15px;">
+                    <i class="fas fa-usb" style="background:#ecfdf5; color:#10b981; font-size:1.5rem; width:50px; height:50px; line-height:50px; margin-bottom:0; margin-right:15px;"></i>
+                    <h4 style="margin:0; color:#10b981;">Projet 2</h4>
+                    <i class="fas fa-file-pdf" style="margin-left:auto; color:#10b981; font-size:1.1rem;"></i>
+                </div>
+                <p style="font-weight:700; font-size:1rem; margin-bottom:12px; color:var(--primary);">Autorisation des clés USB</p>
+                <p style="font-size:0.9rem; color:#64748b; margin-bottom:10px;">
+                    <strong>Contexte :</strong> Politique de sécurité stricte chez Radiall interdisant par défaut l'utilisation des périphériques USB sur le parc informatique.
+                </p>
+                <p style="font-size:0.9rem; color:#64748b;">
+                    <strong>Réalisation :</strong> Mise en place d'une procédure d'autorisation contrôlée des clés USB via les stratégies de groupe (GPO) et gestion des exceptions utilisateurs.
+                </p>
+                <br>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <span style="background:#ecfdf5; color:#065f46; padding:4px 12px; border-radius:50px; font-size:0.75rem; font-weight:600;">Sécurité</span>
+                    <span style="background:#ecfdf5; color:#065f46; padding:4px 12px; border-radius:50px; font-size:0.75rem; font-weight:600;">GPO</span>
+                    <span style="background:#ecfdf5; color:#065f46; padding:4px 12px; border-radius:50px; font-size:0.75rem; font-weight:600;">Radiall</span>
+                </div>
+            </div>
+            </a>
+
+        </div>
+
+        <!-- Bouton tableau de compétences -->
+        <div style="text-align:center; margin-top:50px;">
+            <p style="color:var(--accent); margin-bottom:25px; font-size:0.97rem;">Téléchargez le tableau récapitulatif de mes compétences BTS SIO.</p>
+            <a href="Tableau de compétences.pdf" target="_blank" class="btn" style="background:var(--primary); padding:15px 40px; font-size:1rem;">
+                <i class="fas fa-download"></i> Télécharger le Tableau de Compétences
+            </a>
+        </div>
+    </section>
+
+    <!-- VEILLE -->
+    <section id="veille" style="background-color: white;">
+        <h3 class="section-title">Veille Technologique</h3>
+
+        <!-- Introduction -->
+        <div class="card-style" style="margin-bottom: 30px; border-left: 5px solid var(--secondary); background: linear-gradient(to right, #fff, #f0f9ff);">
+            <div style="display:flex; align-items:center; margin-bottom:15px;">
+                <i class="fas fa-binoculars" style="color:var(--secondary); font-size:1.5rem; margin-right:15px;"></i>
+                <h4 style="color:var(--primary); font-size:1.2rem; margin:0;">Qu'est-ce que la veille technologique ?</h4>
+            </div>
+            <p style="color:#475569; font-size:0.95rem; line-height:1.8; margin-bottom:12px;">
+                La veille technologique consiste à <strong>surveiller les innovations et évolutions d'un domaine</strong> afin de rester informé, anticiper les changements et s'adapter aux nouvelles technologies.
+            </p>
+            <p style="color:#475569; font-size:0.95rem; line-height:1.8; margin-bottom:12px;">
+                Dans le <strong>BTS SIO option SISR</strong>, elle est essentielle car les systèmes, réseaux et enjeux de cybersécurité évoluent rapidement. Elle permet de repérer les menaces, suivre les évolutions des infrastructures, intégrer de nouvelles technologies et maintenir ses compétences à jour.
+            </p>
+            <p style="color:#475569; font-size:0.95rem; line-height:1.8;">
+                C'est donc un <strong>outil indispensable</strong> pour comprendre et accompagner les évolutions du système d'information.
+            </p>
+        </div>
+
+        <!-- Veille 1 : Phishing & Ransomware -->
+        <div class="card-style veille-box" style="margin-bottom: 30px;">
+            <h4 style="font-size:1.3rem; margin-bottom:20px; color:#b91c1c;">
+                <i class="fas fa-shield-alt" style="margin-right:10px;"></i> Phishing & Ransomware
+            </h4>
+            <p style="font-size:1rem; margin-bottom:15px;"><strong>Enjeu :</strong> Protection des PME contre les attaques ciblées.</p>
+            <ul style="margin-left:20px; margin-bottom:20px;">
+                <li style="margin-bottom:8px;"><i class="fas fa-caret-right" style="color:#ef4444; margin-right:8px;"></i> Analyse des vecteurs d'attaque (Email, Failles logicielles).</li>
+                <li style="margin-bottom:8px;"><i class="fas fa-caret-right" style="color:#ef4444; margin-right:8px;"></i> Solutions EDR et politiques de sauvegarde.</li>
+                <li style="margin-bottom:8px;"><i class="fas fa-caret-right" style="color:#ef4444; margin-right:8px;"></i> Sensibilisation des utilisateurs : le facteur humain.</li>
+            </ul>
+            <hr style="border:0; border-top:1px solid #fee2e2; margin:20px 0;">
+            <p style="font-size:0.9rem; color:#b91c1c;"><strong>Sources :</strong> ANSSI, CERT-FR, Zataz.</p>
+        </div>
+
+        <!-- Veille 2 : Lunettes connectées -->
+        <div class="card-style" style="border-left: 5px solid #6366f1; background: linear-gradient(to right, #fff, #eef2ff);">
+            <h4 style="font-size:1.3rem; margin-bottom:20px; color:#4338ca;">
+                <i class="fas fa-glasses" style="margin-right:10px;"></i> Les Lunettes Connectées (Smart Glasses)
+            </h4>
+
+            <p style="font-size:0.95rem; color:#475569; margin-bottom:25px; line-height:1.8;">
+                Les lunettes connectées sont des dispositifs portables qui affichent des informations numériques directement dans le champ de vision de l'utilisateur. Elles combinent <strong>réalité augmentée, connectivité réseau et capteurs intelligents</strong>.
+            </p>
+
+            <!-- PARTIE I -->
+            <h5 style="color:#4338ca; font-size:1.05rem; margin-bottom:15px; padding-bottom:8px; border-bottom:2px solid #c7d2fe;">
+                <i class="fas fa-info-circle" style="margin-right:8px;"></i> I. Fonctionnalités et risques
+            </h5>
+
+            <div style="display:grid; gap:18px; margin-bottom:25px;">
+
+                <div style="background:#eef2ff; border-radius:12px; padding:20px;">
+                    <h5 style="color:#4338ca; font-size:0.95rem; margin-bottom:10px;"><i class="fas fa-eye" style="margin-right:8px;"></i> 1.1 — Affichage en réalité augmentée</h5>
+                    <p style="font-size:0.9rem; color:#475569; line-height:1.8;">
+                        Les lunettes connectées intègrent une technologie de réalité augmentée (RA) qui permet d'afficher des informations numériques <strong>directement dans le champ de vision</strong> de l'utilisateur. Contrairement à un écran classique, les données sont superposées au monde réel, ce qui permet de travailler sans quitter son environnement visuel.
+                    </p>
+                    <p style="font-size:0.9rem; color:#475569; line-height:1.8; margin-top:10px;">
+                        Cette fonctionnalité transforme la manière d'interagir avec les systèmes informatiques, car l'utilisateur peut consulter des informations en temps réel tout en effectuant une tâche physique.
+                    </p>
+                </div>
+
+                <div style="background:#eef2ff; border-radius:12px; padding:20px;">
+                    <h5 style="color:#4338ca; font-size:0.95rem; margin-bottom:10px;"><i class="fas fa-cog" style="margin-right:8px;"></i> 1.2 — Comment ça marche ?</h5>
+                    <p style="font-size:0.9rem; color:#475569; line-height:1.8; margin-bottom:10px;">
+                        Les lunettes connectées sont des objets intelligents qui combinent plusieurs technologies pour fonctionner en temps réel :
+                    </p>
+                    <ul style="margin-left:20px; font-size:0.9rem; color:#475569; line-height:1.8;">
+                        <li style="margin-bottom:6px;"><strong>Capteurs :</strong> caméra, micro, gyroscope, accéléromètre — pour analyser l'environnement et les actions de l'utilisateur.</li>
+                        <li style="margin-bottom:6px;"><strong>Traitement :</strong> données traitées localement via un processeur intégré ou via smartphone/cloud.</li>
+                        <li style="margin-bottom:6px;"><strong>Connectivité :</strong> Wi-Fi ou Bluetooth en permanence pour accéder aux informations en ligne et aux applications métiers.</li>
+                        <li style="margin-bottom:6px;"><strong>Affichage RA :</strong> textes, images, instructions ou schémas superposés au réel — mains libres.</li>
+                        <li style="margin-bottom:6px;"><strong>Interaction :</strong> commande vocale, gestes ou application mobile.</li>
+                    </ul>
+                </div>
+
+                <div style="background:#fff0f0; border-radius:12px; padding:20px; border-left:3px solid #ef4444;">
+                    <h5 style="color:#b91c1c; font-size:0.95rem; margin-bottom:12px;"><i class="fas fa-exclamation-triangle" style="margin-right:8px;"></i> 1.3 — Enjeux de sécurité</h5>
+                    <p style="font-size:0.9rem; color:#475569; line-height:1.8; margin-bottom:12px;">
+                        Les lunettes connectées posent plusieurs enjeux importants car elles sont capables de <strong>collecter, traiter et transmettre des données en continu</strong>.
+                    </p>
+
+                    <div style="background:#fff; border-radius:8px; padding:15px; margin-bottom:12px; border-left:3px solid #f97316;">
+                        <p style="font-size:0.9rem; color:#475569; margin:0; line-height:1.8;">
+                            <strong style="color:#c2410c;">⚠ Atteinte à la vie privée :</strong> Grâce à leur caméra intégrée, elles peuvent filmer ou enregistrer discrètement — capture d'images sans consentement, risque de surveillance non autorisée, non-respect du <strong>RGPD en entreprise</strong>.
+                        </p>
+                    </div>
+
+                    <div style="background:#fff; border-radius:8px; padding:15px; border-left:3px solid #ef4444;">
+                        <p style="font-size:0.9rem; color:#475569; margin:0; line-height:1.8;">
+                            <strong style="color:#b91c1c;">⚠ Risque de piratage :</strong> Comme tout objet connecté — exploitation de failles logicielles, prise de contrôle à distance, accès non autorisé aux données affichées ou stockées, utilisation comme <strong>point d'entrée vers le réseau de l'entreprise</strong>.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PARTIE II -->
+            <h5 style="color:#4338ca; font-size:1.05rem; margin-bottom:15px; padding-bottom:8px; border-bottom:2px solid #c7d2fe;">
+                <i class="fas fa-vr-cardboard" style="margin-right:8px;"></i> II. Microsoft HoloLens 2 — Étude de cas
+            </h5>
+
+            <div style="display:grid; gap:18px; margin-bottom:25px;">
+
+                <div style="background:#eef2ff; border-radius:12px; padding:20px;">
+                    <h5 style="color:#4338ca; font-size:0.95rem; margin-bottom:10px;"><i class="fas fa-history" style="margin-right:8px;"></i> 2.1 — Historique et capacités actuelles</h5>
+                    <p style="font-size:0.9rem; color:#475569; line-height:1.8;">
+                        Les <strong>Microsoft HoloLens 2</strong> sont des lunettes de réalité mixte développées par Microsoft, lancées en <strong>2019</strong> après le premier HoloLens (2016). Conçues pour les professionnels, elles affichent des hologrammes en réalité augmentée avec une meilleure ergonomie, un champ de vision élargi et un suivi précis des mains et des yeux.
+                    </p>
+                    <p style="font-size:0.9rem; color:#475569; line-height:1.8; margin-top:10px;">
+                        Utilisées dans l'<strong>industrie, la santé et la maintenance</strong>, elles permettent de travailler avec des instructions interactives et une assistance à distance. Microsoft a depuis arrêté leur production, mais elles restent une référence importante en réalité augmentée.
+                    </p>
+                </div>
+
+                <div style="background:#eef2ff; border-radius:12px; padding:20px;">
+                    <h5 style="color:#4338ca; font-size:0.95rem; margin-bottom:12px;"><i class="fas fa-chart-bar" style="margin-right:8px;"></i> 2.2 — Chiffres clés</h5>
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:12px;">
+                        <div style="background:white; border-radius:10px; padding:15px; text-align:center; border-top:3px solid #6366f1;">
+                            <div style="font-size:1.8rem; font-weight:700; color:#4338ca; font-family:'Poppins',sans-serif;">50%+</div>
+                            <div style="font-size:0.8rem; color:#64748b; margin-top:4px;">des entreprises du Fortune 500 ont testé la technologie HoloLens</div>
+                        </div>
+                        <div style="background:white; border-radius:10px; padding:15px; text-align:center; border-top:3px solid #6366f1;">
+                            <div style="font-size:1.8rem; font-weight:700; color:#4338ca; font-family:'Poppins',sans-serif;">100k+</div>
+                            <div style="font-size:0.8rem; color:#64748b; margin-top:4px;">exemplaires vendus dans le monde dans des secteurs professionnels</div>
+                        </div>
+                        <div style="background:white; border-radius:10px; padding:15px; text-align:center; border-top:3px solid #6366f1;">
+                            <div style="font-size:1.8rem; font-weight:700; color:#4338ca; font-family:'Poppins',sans-serif;">3</div>
+                            <div style="font-size:0.8rem; color:#64748b; margin-top:4px;">secteurs clés : industrie, santé et logistique</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background:#eef2ff; border-radius:12px; padding:20px;">
+                    <h5 style="color:#4338ca; font-size:0.95rem; margin-bottom:12px;"><i class="fas fa-lock" style="margin-right:8px;"></i> 2.3 — Stratégies d'intégration sécurisée</h5>
+
+                    <div style="background:white; border-radius:8px; padding:15px; margin-bottom:12px; border-left:3px solid #6366f1;">
+                        <p style="font-size:0.9rem; font-weight:700; color:#4338ca; margin-bottom:8px;"><i class="fas fa-mobile-alt" style="margin-right:6px;"></i> MDM — Mobile Device Management</p>
+                        <p style="font-size:0.9rem; color:#475569; line-height:1.8; margin-bottom:8px;">L'utilisation d'une solution MDM (comme <strong>Microsoft Intune</strong>) est essentielle pour administrer ces équipements :</p>
+                        <ul style="margin-left:20px; font-size:0.9rem; color:#475569; line-height:1.8;">
+                            <li>Enregistrement et inventaire des lunettes dans le parc informatique</li>
+                            <li>Application de politiques de sécurité (mots de passe, verrouillage automatique)</li>
+                            <li>Chiffrement des données professionnelles stockées ou transmises</li>
+                        </ul>
+                    </div>
+
+                    <div style="background:white; border-radius:8px; padding:15px; border-left:3px solid #8b5cf6;">
+                        <p style="font-size:0.9rem; font-weight:700; color:#7c3aed; margin-bottom:8px;"><i class="fas fa-shield-alt" style="margin-right:6px;"></i> Principe Zero Trust</p>
+                        <p style="font-size:0.9rem; color:#475569; line-height:1.8; margin-bottom:8px;">Dans une logique <strong>Zero Trust</strong> — « ne jamais faire confiance, toujours vérifier » :</p>
+                        <ul style="margin-left:20px; font-size:0.9rem; color:#475569; line-height:1.8;">
+                            <li>Vérification continue de l'appareil (mises à jour, conformité, absence de faille)</li>
+                            <li>Authentification forte de l'utilisateur (<strong>MFA obligatoire</strong>)</li>
+                            <li>Accès limité aux seules applications nécessaires au métier</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PARTIE III : Conclusion -->
+            <h5 style="color:#4338ca; font-size:1.05rem; margin-bottom:15px; padding-bottom:8px; border-bottom:2px solid #c7d2fe;">
+                <i class="fas fa-clipboard-check" style="margin-right:8px;"></i> III. Conclusion et recommandations SISR
+            </h5>
+
+            <div style="background:#f5f3ff; border-radius:12px; padding:20px; margin-bottom:20px;">
+                <p style="font-size:0.9rem; color:#475569; line-height:1.8; margin-bottom:15px;">
+                    Les lunettes connectées améliorent le travail en entreprise grâce à la réalité augmentée, mais posent des enjeux importants de <strong>sécurité, confidentialité et gestion réseau</strong>. Les principaux risques à maîtriser :
+                </p>
+                <ul style="margin-left:20px; font-size:0.9rem; color:#475569; line-height:1.8;">
+                    <li style="margin-bottom:8px;"><strong>Localisation et mouvements :</strong> Limiter l'accès à la géolocalisation et encadrer le suivi des déplacements avec des politiques de confidentialité strictes.</li>
+                    <li style="margin-bottom:8px;"><strong>Collecte multimédia :</strong> Contrôler l'usage des caméras en entreprise et restreindre les enregistrements dans les zones sensibles.</li>
+                    <li style="margin-bottom:8px;"><strong>Données de santé :</strong> Chiffrer les données sensibles et limiter leur accès aux seules personnes autorisées dans le respect du RGPD.</li>
+                </ul>
+                <p style="font-size:0.9rem; color:#4338ca; margin-top:15px; font-weight:600;">
+                    <i class="fas fa-lightbulb" style="margin-right:8px;"></i> L'administrateur SISR doit considérer les lunettes connectées comme des terminaux professionnels à part entière, avec une gestion stricte des accès et des données, appuyée par des solutions MDM et une approche Zero Trust.
+                </p>
+            </div>
+
+            <hr style="border:0; border-top:1px solid #c7d2fe; margin:20px 0;">
+            <p style="font-size:0.85rem; color:#6366f1;"><strong>Sources :</strong> Microsoft, ANSSI, documentation HoloLens 2, RGPD.</p>
+        </div>
+
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact-section">
+        <h3 style="font-size:2.5rem; margin-bottom:20px; font-family:'Poppins',sans-serif;">Prêt à collaborer ?</h3>
+        <p style="font-size:1.2rem; margin-bottom:40px; color:#bfdbfe;">
+            Basé à Suresnes (92) | Mobile en Île-de-France<br>
+            <a href="mailto:ilias.ahmim@outlook.fr" style="color:white; font-weight:bold;">ilias.ahmim@outlook.fr</a><br><br>
+            <a href="https://www.linkedin.com/in/ilias-ahmim-144a81259" target="_blank" style="color:#93c5fd; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+                <i class="fab fa-linkedin" style="font-size:1.3rem;"></i> Voir mon profil LinkedIn
+            </a>
+        </p>
+        <a href="CV.pdf" target="_blank" class="btn" style="background:white; color:var(--secondary); padding:15px 40px; font-size:1.1rem;">
+            <i class="fas fa-download"></i> Télécharger mon CV complet
+        </a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Ilias Ahmim - Portfolio BTS SIO SISR</p>
+        <p style="font-size:0.8rem; margin-top:10px; opacity:0.6;">Design & Développement Web</p>
+    </footer>
+
+</body>
+</html>
